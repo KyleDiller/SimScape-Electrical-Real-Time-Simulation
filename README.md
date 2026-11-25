@@ -22,9 +22,8 @@ In this repository, we find:
 
 - MATE_SOCS: the Solver-on-Chip is an innovative FPGA solver that is topologically reconfigurable to avoid bitstream generation each time the circuit is modified.
 
-NEW: You can browse my different models easily by using the MATEModelSelector Matlab App! Models can be open, help found (some are missing but I am filling the gaps!)
-
 I don't have a SpeedGoat simulator so if you want to test the model and report the performance, that would be great. It is also possible to port them to other RTDS with some skills.
+The FPGA SOC models require Versal FPGA boards. These are costly but a virtual prototyping system like the ones proposed in MATE_SOCS are still much cheaper than real prototypes and they avoid any worries associated with fixed point arithmetic like overflows.
 
 Folder description:
 Documentation/  contains various reading for real-time simulation aficionado. Read the MATE-SOCS article, nice!
