@@ -95,5 +95,7 @@ Much importantly, the SoC solver is a variable-topology, variable parameter solv
 
 Cite as Kyle Diller, SimScape Electrical models for real-time simulation, 2026.
 
+For comments and positive suggestions, please contact me at KyleDiller@proton.me
+
 
 
