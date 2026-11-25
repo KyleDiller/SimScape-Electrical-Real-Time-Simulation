@@ -91,6 +91,8 @@ Much importantly, the SoC solver is a variable-topology, variable parameter solv
     -MATE_HDLsolver_mySecondCircuit.slx is a buck converter with 2-level inverter (energy-compensated), some RLC elements and switched load. One can make parameter and topology modifications on it (in the Simspace reference model). MakeMate2() will then extract parameters and topology to run on the HDL-Coder fixed MATE-SOCS.
     -MATE_HDLsolver_my4thCircuit.slx: more complex... same as myFirst* but with added transformer and in a Buck converter configuration, which is like NOT firing the lower IGBT of a 2-level inverter.
     -MATE MATE_HDLsolver_my5thcircuitPMSMdrive.slx: Boost converter and PMSM vector drive using oversampling inverter. Sufficent to HIL test an electric car! All parameters of the boost and PMSM are parametrizable DURING simulation. In my last version, I included a table-based variable Ldq PMSM.
+    -MATE MATE_HDLsolver_my5thcircuitPMSMdrive_a.slx: same as previous but with Boost and PMSM in a single subsystem for a single bitstream
+    -InductionHeating_bb_4.slx: Induction heating cookware model with variable RL load in the FPGA. The model comprised of an AC diode rectifier made with Pejovic switches and a 2-level inverter at 22kHz nominal with full oversampling capability driving an RLC resonant load in which the RL vary with PWM frequency.
 
 Cite as Kyle Diller, SimScape Electrical models for real-time simulation, 2026.
 
