@@ -28,6 +28,10 @@ MAXNO=maxnode+no;
 i=1;
 %disp('BUG <= in MAkeSPSNetlist line 24 , Aug 17 2025')
 while i<=size(blk,1)
+    %disp(num2str(i));
+     % if i==22
+     %     xxxxx=1;
+     % end
     if blk{i,2}<=2  % forget ground blocks
         i=i+1;
      %%%%%%
@@ -36,7 +40,9 @@ while i<=size(blk,1)
     elseif blk{i,2}==3 
         paramNames=[];
         paramNames{1}='R';
-        vals=ObtainParameterValue(blk{i,1},paramNames);
+        vals=ObtainParameterValue(blk{i,1},paramNames);  % modif 23 nov.
+        % tmp=['value@' 'R'];
+        % vals = get_param(blk{i,1}, tmp);
         % str='R';
         % try 
         %    val=str2num(get_param(blk{i,1},str));
@@ -48,6 +54,29 @@ while i<=size(blk,1)
         % val=getMaskValue(str); 
         % end
         rlc=[rlc; blk{i,3} blk{i,4} 0 vals{1}  0     0 ];  % carefull about order node1 node2
+        rlcnames{size(rlc,1),1}=blk{i,1};
+        rlcnames{size(rlc,1),2}=i;
+        i=i+1;
+    elseif blk{i,2}==29  % Variable R: we need to read the default value 
+        
+        parentt=get_param(blk{i,1},'Parent');
+        
+        parenttm=get_param(parentt,'MaskType');
+        if isequal(parenttm,'Simscape MATE variable resistance default value mask')
+                tmp=['value@' 'defaultR'];
+                vals = get_param(parentt, tmp);
+        else
+            error(['Simscape variable resistance not supported: ' blk{i,1}]);
+        end
+        parenttt=get_param(parentt,'Parent');
+        try
+            if isequal(get_param(parenttt,'fpga_varY'),'on')
+                vals=1e12;
+            end
+        catch
+        end
+        disp(['Detected FPGA on-line variable element: ' parenttt]);
+        rlc=[rlc; blk{i,3} blk{i,4} 0 vals  0     0 ];  % carefull about order node1 node2
         rlcnames{size(rlc,1),1}=blk{i,1};
         rlcnames{size(rlc,1),2}=i;
         i=i+1;
